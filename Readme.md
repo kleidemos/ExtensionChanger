@@ -327,3 +327,47 @@
         1 file changed, 89 insertions(+)
     
     Дабы не впадать в рекурсивный ад, последний коммит не был приведен.
+
+
+9.	Создайте файл .gitignore, добавьте в него имена и маски имён файлов, которые не должны добавляться в репозитарий. Проверьте корректность работы этого механизма с вашими настройками, зафиксируйте результат в виде снимков экрана.
+
+    Добавил файл .gitignore. Содержимое файла:
+        
+        .vs/
+        ExtensionChanger/bin/
+        ExtensionChanger/obj/
+
+    Статус: 
+
+        $ git status
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .gitignore
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
+    Коммит:
+
+        $ git add .gitignore
+        $ git commit -m "Добавил gitignore."
+        [master 4add147] Добавил gitignore.
+        1 file changed, 3 insertions(+)
+        create mode 100644 .gitignore
+        $ git status
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   Readme.md
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
