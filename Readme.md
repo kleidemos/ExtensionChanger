@@ -229,3 +229,92 @@
 
         no changes added to commit (use "git add" and/or "git commit -a")
 
+    Добавил данный файл в коммит:
+
+        $ git add Readme.md
+
+    Статус после добавления, но до написания данных строк:
+
+        $ git status
+        On branch master
+        Changes to be committed:
+        (use "git reset HEAD <file>..." to unstage)
+
+                modified:   Readme.md
+
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/Program.fs
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+    Статус после этих строк:
+
+        $ git status
+        On branch master
+        Changes to be committed:
+        (use "git reset HEAD <file>..." to unstage)
+
+                modified:   Readme.md
+
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/Program.fs
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+    Как видим, Readme.md встречается 2 раза. Это связанно с тем, что в коммите регистрируется не сам файл, а diff.
+    Если закоммитить данные сейчас, то текущие изменения не будут зарегестированы коммитом.
+
+        $ git commit -m "Коммит регистрирующий изменения файла, но не регистрирующий ищменения вносимые после. // я без понятия как это объяснить"
+        [master e388a5a] Коммит регистрирующий изменения файла, но не регистрирующий ищменения вносимые после. // я без понятия как это объяснить
+        1 file changed, 160 insertions(+), 1 deletion(-)
+    
+    _// Должен сказать, что обычно мои комментарии к коммитам имееют относительно стабильную структуру, но в рамках данной лабораторной, ввиду разрушения четвертой стены мне не удается придерживаться своего стиля._
+
+    Статус:
+
+        $ git status
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/Program.fs
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
+    Как видим, Readme.md считается измененным.
+
+    Коммит без -m:
+
+        $ git add ExtensionChanger/Program.fs
+        $ git commit
+        // здесь был "редактор"
+        [master 4013998] Коммит без -m.
+        1 file changed, 5 insertions(+), 2 deletions(-)
+
+    По сути то же самое, но с юзерфрендли комбинацией `Esc -> ":wq" -> Enter`.
