@@ -69,4 +69,163 @@
 
 7.	Просмотрите статус репозитария, выполните commit, повторно проверьте статус
 
-        
+    Проверка статуса: 
+
+        $ git status
+        On branch master
+
+        Initial commit
+
+        Changes to be committed:
+        (use "git rm --cached <file>..." to unstage)
+
+                new file:   ExtensionChanger.sln
+                new file:   ExtensionChanger/App.config
+                new file:   ExtensionChanger/AssemblyInfo.fs
+                new file:   ExtensionChanger/ExtensionChanger.fsproj
+                new file:   ExtensionChanger/Program.fs
+                new file:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+    .vs/ не добавлен т.к. по умолчанию git игнорирует файлы начинающиеся на '.'.
+
+    Коммит:
+
+        $ git commit -m "Инициация."
+        [master (root-commit) 4c3d5a7] Инициация.
+        6 files changed, 230 insertions(+)
+        create mode 100644 ExtensionChanger.sln
+        create mode 100644 ExtensionChanger/App.config
+        create mode 100644 ExtensionChanger/AssemblyInfo.fs
+        create mode 100644 ExtensionChanger/ExtensionChanger.fsproj
+        create mode 100644 ExtensionChanger/Program.fs
+        create mode 100644 Readme.md
+
+    Проверка статуса:
+
+        $ git status
+        On branch master
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+
+        nothing added to commit but untracked files present (use "git add" to track)
+
+    Как видим, проект не содержит измененных файлов, за исключением .vs/. Данные строки пишутся после всех операций (иначе данный файл уже был бы в изменных).
+
+8.	Измените содержимое нескольких файлов, создайте новые файлы. Просмотрите статус репозитария, проиндексируйте раздельно несколько изменений, выполните серию коммитов. Выполните коммит с ключом –m и без него.
+
+    Внес информацию о 7 пункте;  
+    Добавил файл Changer.fs;  
+    Сделал черновую реализацию. 
+
+        $ git status
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/ExtensionChanger.fsproj
+                modified:   ExtensionChanger/Program.fs
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/Changer.fs
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
+    Зарегистировал файл в коммите:
+
+        $ git add "ExtensionChanger/Changer.fs"
+
+    Статус:
+
+        $ git status
+        On branch master
+        Changes to be committed:
+        (use "git reset HEAD <file>..." to unstage)
+
+                new file:   ExtensionChanger/Changer.fs
+
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/ExtensionChanger.fsproj
+                modified:   ExtensionChanger/Program.fs
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+    Закоммитил:
+
+        $ git commit -m "Добавил модуль выполняющий основную работу."
+        [master 631deb0] Добавил модуль выполняющий основную работу.
+        1 file changed, 7 insertions(+)
+        create mode 100644 ExtensionChanger/Changer.fs
+
+    Статус:
+
+        $ git status
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/ExtensionChanger.fsproj
+                modified:   ExtensionChanger/Program.fs
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
+    Добавил файл проекта:
+
+        $ git add ExtensionChanger/ExtensionChanger.fsproj
+    
+    Закоммитил:
+
+        $ git commit -m "Изменения в файле проект, по идее данный коммит должен был идти в рамках предыдущего."
+        [master 7380bbc] Изменения в файле проект, по идее данный коммит должен был идти в рамках предыдущего.
+        1 file changed, 1 insertion(+)
+
+    Статус:
+
+        $ git status
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/Program.fs
+                modified:   Readme.md
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+
+                .vs/
+                ExtensionChanger/bin/
+                ExtensionChanger/obj/
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
