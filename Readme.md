@@ -718,3 +718,22 @@
         remote: Resolving deltas: 100% (25/25), done.
         To https://github.com/kleidemos/ExtensionChanger.git
         * [new branch]      master -> master
+
+17.	Выполните изменение файлов локального репозитария, загрузите изменения на сервер.
+
+    Должен быть `$ git push`, но я забыл поставить свзять, поэтому:
+
+        $ git push --set-upstream origin master
+        Counting objects: 3, done.
+        Delta compression using up to 6 threads.
+        Compressing objects: 100% (3/3), done.
+        Writing objects: 100% (3/3), 665 bytes | 0 bytes/s, done.
+        Total 3 (delta 2), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+        To https://github.com/kleidemos/ExtensionChanger.git
+        c8f9cd5..cfd3c9a  master -> master
+        Branch master set up to track remote branch master from origin.
+
+
+
+    
