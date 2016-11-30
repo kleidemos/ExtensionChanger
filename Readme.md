@@ -738,3 +738,62 @@
     
     Данные две строки были добавлены через сайт Github-а.
     
+    Стягивание поледней версии:
+
+        $ git fetch
+        remote: Counting objects: 3, done.
+        remote: Compressing objects: 100% (3/3), done.
+        remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+        Unpacking objects: 100% (3/3), done.
+        From https://github.com/kleidemos/ExtensionChanger
+        4de74fd..ff7313b  master     -> origin/master
+
+    Применение: 
+
+        $ git pull
+        Updating 4de74fd..ff7313b
+        Fast-forward
+        Readme.md | 7 ++++---
+        1 file changed, 4 insertions(+), 3 deletions(-)
+
+        $ git show --pretty=full
+        commit ff7313b4522ecfbed3778de0935b92cb7748e555
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Commit: GitHub <noreply@github.com>
+
+            Изменения со стороны Github-а.
+
+        diff --git a/Readme.md b/Readme.md
+        index 9893b5b..f0099d0 100644
+        --- a/Readme.md
+        +++ b/Readme.md
+        @@ -734,6 +734,7 @@
+                c8f9cd5..cfd3c9a  master -> master
+                Branch master set up to track remote branch master from origin.
+
+        -
+        -
+        -
+        \ No newline at end of file
+        +18.    Выполните изменение файлов локального репозитария, откатите изменения, загрузив версию с сервера.
+        +
+        +    Данные две строки были добавлены через сайт Github-а.
+        +
+
+    Собственно задание данного пункта:
+    
+        $ git diff
+        diff --git a/Readme.md b/Readme.md
+        index f0099d0..f9a0532 100644
+        --- a/Readme.md
+        +++ b/Readme.md
+        @@ -738,3 +738,4 @@
+
+            Данные две строки были добавлены через сайт Github-а.
+
+        +    Некое изменение.
+        \ No newline at end of file
+
+        $ git checkout master --force
+        Already on 'master'
+        Your branch is up-to-date with 'origin/master'.
