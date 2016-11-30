@@ -465,3 +465,76 @@
                 modified:   Readme.md
 
         no changes added to commit (use "git add" and/or "git commit -a")
+
+12.	Выполните получение версии файла из репозитария (откат, checkout). Просмотрите содержимое файлов с последними изменениями.
+
+    Я внес некоторые изменения в файл ExtensionChanger/Changer.fs. После чего:
+
+        $ git st
+        On branch master
+        Changes not staged for commit:
+        (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+                modified:   ExtensionChanger/Changer.fs
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+
+    Содержимое:
+
+        $ cat ExtensionChanger/Changer.fs
+        module Changer
+
+        open System.IO
+
+        let setExtension ext (directory:DirectoryInfo) =
+            directory.GetFiles()
+            // я "случайно" снес часть кода
+
+    Откат:
+    
+        $ git checkout ExtensionChanger/Changer.fs
+
+    Содержимое:
+
+        $ cat ExtensionChanger/Changer.fs
+        module Changer
+
+        open System.IO
+
+        let setExtension ext (directory:DirectoryInfo) =
+            directory.GetFiles()
+            |> Seq.iter (fun p -> File.Move(p.FullName, Path.ChangeExtension(p.FullName, ext)))
+
+    Не понял, какие конкретно изменения я должен был показать, поэтому вывел diff:
+
+        $ git diff
+        diff --git a/Readme.md b/Readme.md
+        index 45c3773..612c2c0 100644
+        --- a/Readme.md
+        +++ b/Readme.md
+        @@ -465,3 +465,44 @@
+                        modified:   Readme.md
+
+                no changes added to commit (use "git add" and/or "git commit -a")
+        +
+        +12.    Выполните получение версии файла из репозитария (откат, checkout). Просмотрите содержимое файлов с последними изменениями.
+        +
+        +    Я внес некоторые изменения в файл ExtensionChanger/Changer.fs. После чего:
+        +
+        +        $ git st
+        +        On branch master
+        +        Changes not staged for commit:
+        +        (use "git add <file>..." to update what will be committed)
+        +        (use "git checkout -- <file>..." to discard changes in working directory)
+        +
+        +                modified:   ExtensionChanger/Changer.fs
+        +
+        +        no changes added to commit (use "git add" and/or "git commit -a")
+        +
+        +    Содержимое:
+        +
+        +        $ cat ExtensionChanger/Changer.fs
+        +        module Changer
+
+    _// Здесь лишь начало._
