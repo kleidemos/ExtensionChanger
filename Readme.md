@@ -701,3 +701,20 @@
         Resolving deltas: 100% (14032/14032), done.
         Checking connectivity... done.
         Checking out files: 100% (10186/10186), done.
+
+16.	Создайте собственную учётную запись на Github, выполните загрузку своего репозитария на сервер. 
+
+    Учетка была создано давно.
+
+    Создал репозиторий на Github "ExtensionChanger". 
+
+        $ git remote add origin https://github.com/kleidemos/ExtensionChanger.git
+        $ git push origin master
+        Counting objects: 54, done.
+        Delta compression using up to 6 threads.
+        Compressing objects: 100% (53/53), done.
+        Writing objects: 100% (54/54), 14.37 KiB | 0 bytes/s, done.
+        Total 54 (delta 25), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (25/25), done.
+        To https://github.com/kleidemos/ExtensionChanger.git
+        * [new branch]      master -> master
