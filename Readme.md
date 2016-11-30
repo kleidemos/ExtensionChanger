@@ -42,8 +42,8 @@
 
     Настройки имени и почты: 
 
-        $ git config --global user.name "Зайнуллин Фархад Ильнурович" 
-        $ git config --global user.mail "zaynullin.farkhad.pro@yandex.ru" 
+        $ git config --global user.name "kleidemos" 
+        $ git config --global user.mail "arche-kunktator@yandex.ru" 
         // на самом деле я использую другой адрес
         
     Настройка окончания строк
@@ -371,3 +371,84 @@
 
         no changes added to commit (use "git add" and/or "git commit -a")
 
+10.	Выведите историю репозитария в полной и сокращённой (однострочной) форме. Освойте дополнительные параметры и режимы отображения команды log.
+
+    Стандартный вывод:
+
+        $ git log
+        commit 291fdea42b3e32875ce46f3c196bf7f701efa366
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 02:36:26 2016 +0500
+
+            Пункт 9.
+
+        commit 4add1477ca50c0b9b48d041239210e3f6b770bb5
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 02:34:26 2016 +0500
+
+            Добавил gitignore.
+
+        commit c12d75affa006aa5df931249d09caae7c22249f8
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 02:27:25 2016 +0500
+
+            Пункт 8
+
+        commit 769373815f33d73d19e44c0ba6b034312e1e7696
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 02:25:33 2016 +0500
+
+            Почти завершенный 8 пункт
+
+        commit 4013998de4cbd01e70c16794fcb3c2833a9e0062
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 02:18:00 2016 +0500
+
+            Коммит без -m.
+
+        commit e388a5a3463662660dbc0c9b972a5e7005c404a9
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 02:15:23 2016 +0500
+
+            Коммит регистрирующий изменения файла, но не регистрирующий ищменения вносимые после. // я без понятия как это объяснить
+
+        commit 7380bbc2f6b4ebd49afe7a557af0eb0459ef568a
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 01:59:18 2016 +0500
+
+            Изменения в файле проект, по идее данный коммит должен был идти в рамках предыдущего.
+
+        commit 631deb005396d47e0c1adfd0679dcffa36297e57
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 01:57:32 2016 +0500
+
+            Добавил модуль выполняющий основную работу.
+
+        commit 4c3d5a72c59a6573509c85b5761f026219c11cf5
+        Author: kleidemos <arche-kunktator@yandex.ru>
+        Date:   Wed Nov 30 01:21:35 2016 +0500
+
+            Инициация.
+
+    Короткий:
+
+        $ git log --pretty=oneline
+        291fdea42b3e32875ce46f3c196bf7f701efa366 Пункт 9.
+        4add1477ca50c0b9b48d041239210e3f6b770bb5 Добавил gitignore.
+        c12d75affa006aa5df931249d09caae7c22249f8 Пункт 8
+        769373815f33d73d19e44c0ba6b034312e1e7696 Почти завершенный 8 пункт
+        4013998de4cbd01e70c16794fcb3c2833a9e0062 Коммит без -m.
+        e388a5a3463662660dbc0c9b972a5e7005c404a9 Коммит регистрирующий изменения файла, но не регистрирующий ищменения вносимые после. // я без понятия как это объяснить
+        7380bbc2f6b4ebd49afe7a557af0eb0459ef568a Изменения в файле проект, по идее данный коммит должен был идти в рамках предыдущего.
+        631deb005396d47e0c1adfd0679dcffa36297e57 Добавил модуль выполняющий основную работу.
+        4c3d5a72c59a6573509c85b5761f026219c11cf5 Инициация.
+
+    Есть множество вариантов вывода включая заданные самостоятельно. Также доступна фильтрация по файлам, времени, отношению к коммитам, автору и т.д. Подробнее [здесь](https://git-scm.com/book/ru/v1/Основы-Git-Просмотр-истории-коммитов).
+
+    Вывод "{хеш} {сообщение}" в виде графа последние 4 коммитов.
+
+        $ git log --pretty=format:"%h %s" --graph -4
+        * 291fdea Пункт 9.
+        * 4add147 Добавил gitignore.
+        * c12d75a Пункт 8
+        * 7693738 Почти завершенный 8 пункт
