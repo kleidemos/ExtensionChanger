@@ -7,6 +7,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ExtensionChanger", "Extensi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{25463223-0994-49A2-B0DD-31CF72704DBC}"
 	ProjectSection(SolutionItems) = preProject
+		IDE.md = IDE.md
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
