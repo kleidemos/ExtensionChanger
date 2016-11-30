@@ -688,3 +688,16 @@
 
         +14.    Выполните сравнение (просмотр различий) текущего состояния какого-либо файла с зафиксированной версией из коммита.
 
+15.	Выполните клонирование любого репозитария с Github
+
+    Пример по UWP от mcrsft:
+
+        $ git clone "https://github.com/Microsoft/Windows-universal-samples.git"
+        Cloning into 'Windows-universal-samples'...
+        remote: Counting objects: 24121, done.
+        remote: Compressing objects: 100% (679/679), done.
+        remote: Total 24121 (delta 274), reused 0 (delta 0), pack-reused 23442
+        Receiving objects: 100% (24121/24121), 23.12 MiB | 2.64 MiB/s, done.
+        Resolving deltas: 100% (14032/14032), done.
+        Checking connectivity... done.
+        Checking out files: 100% (10186/10186), done.
