@@ -538,3 +538,140 @@
         +        module Changer
 
     _// Здесь лишь начало._
+
+13.	Вернитесь к последней версии в ветке master. Просмотрите содержимое файлов, которые были затронуты данной операцией.
+
+    Слабо понимаю, что здесь надо было сделать, поэтому откатился к предыдущему коммиту:
+
+        $ git log --pretty=format:"%h %s" --graph -4
+        * 5de97e5 Пункт 12.
+        * 5ec39b7 Пункт 11.
+        * 83262ea Пункт 10.
+        * 291fdea Пункт 9.
+        $ git checkout 5ec39b7
+        Note: checking out '5ec39b7'.
+
+        You are in 'detached HEAD' state. You can look around, make experimental
+        changes and commit them, and you can discard any commits you make in this
+        state without impacting any branches by performing another checkout.
+
+        If you want to create a new branch to retain commits you create, you may
+        do so (now or later) by using -b with the checkout command again. Example:
+
+        git checkout -b <new-branch-name>
+
+        HEAD is now at 5ec39b7... Пункт 11.
+        
+        $ git status
+        HEAD detached at 5ec39b7
+        nothing to commit, working tree clean
+
+    И вернулся обратно к мастеру:
+
+        $ git checkout master
+        Previous HEAD position was 5ec39b7... Пункт 11.
+        Switched to branch 'master'
+
+    В случае если под просмотром понималось сообщение об измененных файлах препятсвующих переключению, то:
+
+        $ git checkout master
+        M       Readme.md
+        Already on 'master'
+
+    Вывод данных по последнему коммиту:
+
+        $ git show --pretty=fuller
+        commit 5de97e5077f4ff8722f1e256268e8437639b9ea0
+        Author:     kleidemos <arche-kunktator@yandex.ru>
+        AuthorDate: Wed Nov 30 12:27:22 2016 +0500
+        Commit:     kleidemos <arche-kunktator@yandex.ru>
+        CommitDate: Wed Nov 30 12:27:22 2016 +0500
+
+            Пункт 12.
+
+        diff --git a/Readme.md b/Readme.md
+        index 45c3773..709b91f 100644
+        --- a/Readme.md
+        +++ b/Readme.md
+        @@ -465,3 +465,76 @@
+                        modified:   Readme.md
+
+                no changes added to commit (use "git add" and/or "git commit -a")
+        +
+        +12.    Выполните получение версии файла из репозитария (откат, checkout). Просмотрите содержимое файлов с последними изменениями.
+        +
+        +    Я внес некоторые изменения в файл ExtensionChanger/Changer.fs. После чего:
+        +
+        +        $ git st
+        +        On branch master
+        +        Changes not staged for commit:
+        +        (use "git add <file>..." to update what will be committed)
+        +        (use "git checkout -- <file>..." to discard changes in working directory)
+        +
+        +                modified:   ExtensionChanger/Changer.fs
+        +
+        +        no changes added to commit (use "git add" and/or "git commit -a")
+        +
+        +    Содержимое:
+        +
+        +        $ cat ExtensionChanger/Changer.fs
+        +        module Changer
+        +
+        +        open System.IO
+        +
+        +        let setExtension ext (directory:DirectoryInfo) =
+        +            directory.GetFiles()
+        +            // я "случайно" снес часть кода
+        +
+        +    Откат:
+        +
+        +        $ git checkout ExtensionChanger/Changer.fs
+        +
+        +    Содержимое:
+        +
+        +        $ cat ExtensionChanger/Changer.fs
+        +        module Changer
+        +
+        +        open System.IO
+        +
+        +        let setExtension ext (directory:DirectoryInfo) =
+        +            directory.GetFiles()
+        +            |> Seq.iter (fun p -> File.Move(p.FullName, Path.ChangeExtension(p.FullName, ext)))
+        +
+        +    Не понял, какие конкретно изменения я должен был показать, поэтому вывел diff:
+        +
+        +        $ git diff
+        +        diff --git a/Readme.md b/Readme.md
+        +        index 45c3773..612c2c0 100644
+        +        --- a/Readme.md
+        +        +++ b/Readme.md
+        +        @@ -465,3 +465,44 @@
+        +                        modified:   Readme.md
+        +
+        +                no changes added to commit (use "git add" and/or "git commit -a")
+        +        +
+        +        +12.    Выполните получение версии файла из репозитария (откат, checkout). Просмотрите содержимое файлов с последними изменениями.
+        +        open System.IO
+        +
+        +        let setExtension ext (directory:DirectoryInfo) =
+        +            directory.GetFiles()
+        +            |> Seq.iter (fun p -> File.Move(p.FullName, Path.ChangeExtension(p.
+        FullName, ext)))
+        +
+        +    Не понял, какие конкретно изменения я должен был показать, поэтому вывел di
+        ff:
+        +
+        +        $ git diff
+        +        diff --git a/Readme.md b/Readme.md
+        +        index 45c3773..612c2c0 100644
+        +        --- a/Readme.md
+        +        +++ b/Readme.md
+        +        @@ -465,3 +465,44 @@
+        +                        modified:   Readme.md
+        +
+        +                no changes added to commit (use "git add" and/or "git commit -a
+        ")
+        +        +
+        +        +12.    Выполните получение версии файла из репозитария (откат, checkou
+        t). Просмотрите содержимое файлов с последними изменениями.
+
