@@ -734,6 +734,7 @@
         c8f9cd5..cfd3c9a  master -> master
         Branch master set up to track remote branch master from origin.
 
-
-
+18.	Выполните изменение файлов локального репозитария, откатите изменения, загрузив версию с сервера.
+    
+    Данные две строки были добавлены через сайт Github-а.
     
