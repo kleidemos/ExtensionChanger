@@ -9,21 +9,22 @@ let source =
 type FileSystemInfo with
     static member getFullName (info:FileSystemInfo) = info.FullName
 
+// из-за проблем с dispose решил все-таки слить все вместе, безопаснее
 let checkDimension file = 
-    file
-    |> FileSystemInfo.getFullName
-    |> Drawing.Image.FromFile
-    |> fun p -> p.Width, p.Height
-    |> function 
-    | 1920, 1080 | 1080, 1920 -> true 
-    | _ -> false
+    try 
+        use image = file |> Drawing.Image.FromFile
+        (image.Width, image.Height)
+        |> function 1920, 1080 | 1080, 1920 -> true | _ -> false
+        |> Some
+    with 
+        _ -> None
 
 let sourceFiles = 
     source
     |> FileSystemInfo.getFullName
     |> Directory.GetFiles
+    |> Seq.filter (checkDimension >> (=) (Some true))
     |> Seq.map FileInfo
-    |> Seq.filter checkDimension
     |> List.ofSeq
 
 let destination = """C:\WindowsInteresting""" |> DirectoryInfo
@@ -41,4 +42,31 @@ let copyFiles () =
         then Directory.CreateDirectory destination.FullName |> ignore; destination.Refresh()
     sourceFiles |> List.iter copyImage
 
-copyFiles ()
+//copyFiles ()
+
+let oldDestination = """C:\Assets""" |> DirectoryInfo
+
+let removeNotImages () = 
+    oldDestination
+    |> string
+    |> Directory.GetFiles
+    |> Seq.filter (checkDimension >> (=) None)
+    |> Seq.iter File.Delete
+
+let removeBadImages () = 
+    oldDestination
+    |> string
+    |> Directory.GetFiles
+    |> Seq.filter (checkDimension >> (=) (Some false))
+    |> Seq.iter File.Delete
+
+let changeExtensionToJpg () =
+    oldDestination
+    |> string
+    |> Directory.GetFiles
+    |> Seq.map FileInfo
+    |> Seq.iter (fun p -> File.Move(p.FullName, p.FullName |> changeExtension ".jpg"))
+
+//removeNotImages()
+//removeBadImages()
+//changeExtensionToJpg()
